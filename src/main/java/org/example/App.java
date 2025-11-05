@@ -16,6 +16,8 @@ public class App
         scanner.close();
 
         if (operation.equals("+")) {
+            prosthesi a=new prosthesi();
+            System.out.print(a.calculate(num1,num2) );
 
         }
         else if (operation.equals("-")) {
