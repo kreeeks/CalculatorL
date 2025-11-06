@@ -29,6 +29,8 @@ public class App
 
         }
         else if (operation.equals("*")) {
+            pollaplasiasmos a=new pollaplasiasmos();
+            System.out.print(a.calculate(num1,num2));
 
         }
         else if (operation.equals("/")) {
