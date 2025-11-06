@@ -31,6 +31,8 @@ public class App
 
         }
         else if (operation.equals("/")) {
+            division a=new division();
+            System.out.println(a.calculate(num1,num2));
 
         }
         else {
