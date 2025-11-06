@@ -1,4 +1,6 @@
 package org.example;
+import jdk.internal.org.jline.terminal.TerminalBuilder;
+
 import java.util.Scanner;
 
 
@@ -21,6 +23,8 @@ public class App
 
         }
         else if (operation.equals("-")) {
+            subtract a=new subtract();
+            System.out.print(a.calculate(num1,num2));
 
         }
         else if (operation.equals("*")) {
