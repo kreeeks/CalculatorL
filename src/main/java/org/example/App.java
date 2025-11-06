@@ -26,8 +26,6 @@ public class App
             subtract a=new subtract();
             System.out.print(a.calculate(num1,num2));
 
-            afairesh a=new afairesh();
-            System.out.print(a.calculate(num1,num2) );
 
         }
         else if (operation.equals("*")) {
