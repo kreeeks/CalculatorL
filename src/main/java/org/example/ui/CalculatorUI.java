@@ -26,10 +26,28 @@ public class CalculatorUI extends JFrame {
                 "0","=","*","/",
         };
         for (String text : labels){
-            JLabel lbl = new JLabel(text,SwingConstants.CENTER);
-            lbl.setFont(new Font("Arial", Font.BOLD,22));
-            lbl.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-            panel.add(lbl);
+            JButton btn = new JButton(text);
+            btn.setFont(new Font("Arial", Font.BOLD,22));
+            btn.addActionListener(e -> {
+                String current = display.getText();
+                if(text.equals("C"){
+                    display.setText("0");
+                } else if (text.equals("=")){
+
+                    // εδω θα βαλουμε τι κανει στο = καθε πραξη κλπ 
+                }
+                else {
+                    if (current.equals("0");
+                      display.setText(text));
+                    else
+                        display.setText(current+ text);
+                }
+            });
+
+
+
+
+            panel.add(btn);
         }
         add(panel, BorderLayout.CENTER);
         setVisible(true);
