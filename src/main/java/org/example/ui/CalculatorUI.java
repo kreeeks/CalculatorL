@@ -48,9 +48,9 @@ public class CalculatorUI extends JFrame {
                     display.setText("0");
                 } else if (text.equals("=")){
 
-                    // εδω θα βαλουμε τι κανει στο = καθε πραξη κλπ
+
                     if (operation != null && !startNewNumber) {
-                        // χωρίζουμε σε δύο μέρη: πριν και μετά τον τελεστή
+
                         String[] parts = current.split("[+\\-*/]");
                         if (parts.length < 2) return;
 
@@ -77,7 +77,7 @@ public class CalculatorUI extends JFrame {
                 else if (text.matches("[+\\-*/]")) {
                     firstNumber = Double.parseDouble(current);
                     operation = text;
-                    display.setText(current + text); // δείξε την πράξη μέχρι τώρα (π.χ. 2+)
+                    display.setText(current + text);
                     startNewNumber = false;
 
             }
