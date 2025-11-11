@@ -45,11 +45,10 @@ public class CalculatorUI extends JFrame {
                     display.setText("0");
                     startNewNumber = true;
                 } else if (text.equals("=")){
-<<<<<<< HEAD
 
                     // εδω θα βαλουμε τι κανει στο = καθε πραξη κλπ
-=======
-                    if (operation != null && !startNewNumber){
+
+                  if (operation != null && !startNewNumber){
                         double second = Double.parseDouble(current);
                         double result;
                         if(operation.equals("+")){
@@ -67,7 +66,7 @@ public class CalculatorUI extends JFrame {
                         operation = null;
                         startNewNumber = true;
                     }
->>>>>>> b3798ccdfb11478e692bc3a7c1c6ec5cac2f829f
+
                 }
                 else if(text.matches("[+\\-*/]")) {
                     firstNumber = Double.parseDouble(current);
