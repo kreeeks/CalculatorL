@@ -47,8 +47,7 @@ public class CalculatorUI extends JFrame {
                 } else if (text.equals("=")){
 
                     // εδω θα βαλουμε τι κανει στο = καθε πραξη κλπ
-
-                  if (operation != null && !startNewNumber){
+                    if (operation != null && !startNewNumber){
                         double second = Double.parseDouble(current);
                         double result;
                         if(operation.equals("+")){
