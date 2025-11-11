@@ -49,12 +49,19 @@ public class CalculatorUI extends JFrame {
                 } else if (text.equals("=")){
 
 
+                    // εδω θα βαλουμε τι κανει στο = καθε πραξη κλπ
+
+                  if (operation != null && !startNewNumber){
+                        double second = Double.parseDouble(current);
+
+
                     if (operation != null && !startNewNumber) {
 
                         String[] parts = current.split("[+\\-*/]");
                         if (parts.length < 2) return;
 
                         double second = Double.parseDouble(parts[1]);
+
                         double result;
 
                         if (operation.equals("+")) {
@@ -73,6 +80,7 @@ public class CalculatorUI extends JFrame {
                         operation = null;
                         startNewNumber = true;
                     }
+
                 }
                 else if (text.matches("[+\\-*/]")) {
                     firstNumber = Double.parseDouble(current);
