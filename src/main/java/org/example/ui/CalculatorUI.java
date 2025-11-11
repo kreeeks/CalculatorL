@@ -68,7 +68,7 @@ public class CalculatorUI extends JFrame {
                     firstNumber = Double.parseDouble(current);
                     operation = text;
                     startNewNumber = true;
-                    }else{
+                }else{
                     if (startNewNumber || current.equals("0")) {
                         display.setText(text);
                         startNewNumber = false;
