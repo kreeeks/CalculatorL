@@ -34,7 +34,7 @@ public class CalculatorUI extends JFrame {
                     display.setText("0");
                 } else if (text.equals("=")){
 
-                    // εδω θα βαλουμε τι κανει στο = καθε πραξη κλπ 
+                    // εδω θα βαλουμε τι κανει στο = καθε πραξη κλπ
                 }
                 else {
                     if (current.equals("0");
