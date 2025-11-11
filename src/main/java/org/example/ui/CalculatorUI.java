@@ -2,9 +2,21 @@ package org.example.ui;
 import javax.swing.*;
 import java.awt.*;
 
+import org.example.prosthesi;
+import org.example.subtract;
+import org.example.pollaplasiasmos;
+import org.example.division;
+
 public class CalculatorUI extends JFrame {
 
+
+    private JTextField display;
+    private double firstNumber = 0;
+    private String operation = null;
+    private boolean startNewNumber = true;
+
     public CalculatorUI() {
+
         setTitle("Calculator");
         setSize(300, 400);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -31,16 +43,56 @@ public class CalculatorUI extends JFrame {
             btn.addActionListener(e -> {
                 String current = display.getText();
                 if(text.equals("C"){
+                    firstNumber = 0;
+                    operation = null;
                     display.setText("0");
                 } else if (text.equals("=")){
 
-                    // εδω θα βαλουμε τι κανει στο = καθε πραξη κλπ 
+                    // εδω θα βαλουμε τι κανει στο = καθε πραξη κλπ
+                    if (operation != null && !startNewNumber) {
+                        // χωρίζουμε σε δύο μέρη: πριν και μετά τον τελεστή
+                        String[] parts = current.split("[+\\-*/]");
+                        if (parts.length < 2) return;
+
+                        double second = Double.parseDouble(parts[1]);
+                        double result;
+
+                        if (operation.equals("+")) {
+                            result = new prosthesi().calculate(firstNumber, second);
+                        } else if (operation.equals("-")) {
+                            result = new subtract().calculate(firstNumber, second);
+                        } else if (operation.equals("*")) {
+                            result = new pollaplasiasmos().calculate(firstNumber, second);
+                        } else if (operation.equals("/")) {
+                            result = new division().calculate(firstNumber, second);
+                        } else {
+                            result = 0;
+                        }
+
+                        display.setText(current + "=" + result);
+                        operation = null;
+                        startNewNumber = true;
+                    }
                 }
+                else if (text.matches("[+\\-*/]")) {
+                    firstNumber = Double.parseDouble(current);
+                    operation = text;
+                    display.setText(current + text); // δείξε την πράξη μέχρι τώρα (π.χ. 2+)
+                    startNewNumber = false;
+
+            }
                 else {
-                    if (current.equals("0");
-                      display.setText(text));
-                    else
-                        display.setText(current+ text);
+                    if (startNewNumber && !current.contains(operation != null ? operation : "")) {
+                        display.setText(text);
+                        startNewNumber = false;
+                    }
+                    else{
+                    if (current.equals("0"){
+                      display.setText(text));}
+                    else{
+                            display.setText(current + text);
+                        }
+                }
                 }
             });
 
