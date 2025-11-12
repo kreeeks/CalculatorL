@@ -42,7 +42,7 @@ public class CalculatorUI extends JFrame {
             btn.setFont(new Font("Arial", Font.BOLD,22));
             btn.addActionListener(e -> {
                 String current = display.getText();
-                if(text.equals("C"){
+                if(text.equals("C")){
                     firstNumber = 0;
                     operation = null;
                     display.setText("0");
@@ -53,16 +53,16 @@ public class CalculatorUI extends JFrame {
 
                   if (operation != null && !startNewNumber){
                         double second = Double.parseDouble(current);
-
+                       double result;
 
                     if (operation != null && !startNewNumber) {
 
                         String[] parts = current.split("[+\\-*/]");
                         if (parts.length < 2) return;
 
-                        double second = Double.parseDouble(parts[1]);
+                       // double second = Double.parseDouble(parts[1]);
 
-                        double result;
+                        //double result;
 
                         if (operation.equals("+")) {
                             result = new prosthesi().calculate(firstNumber, second);
@@ -71,7 +71,16 @@ public class CalculatorUI extends JFrame {
                         } else if (operation.equals("*")) {
                             result = new pollaplasiasmos().calculate(firstNumber, second);
                         } else if (operation.equals("/")) {
+                            if (second == 0) {
+                                display.setText("Error");
+                                operation = null;
+                                startNewNumber = true;
+                                return;
+                            }
                             result = new division().calculate(firstNumber, second);
+                            } else {
+                                result = 0;
+                            }
                         } else {
                             result = 0;
                         }
@@ -83,20 +92,22 @@ public class CalculatorUI extends JFrame {
 
                 }
                 else if (text.matches("[+\\-*/]")) {
-                    firstNumber = Double.parseDouble(current);
+                    if("Error".equals(current)) current="0";
+
+                    firstNumber = Double.parseDouble(current.replaceAll("[^0-9.\\-]",""));
                     operation = text;
                     display.setText(current + text);
                     startNewNumber = false;
 
             }
                 else {
-                    if (startNewNumber && !current.contains(operation != null ? operation : "")) {
+                    if (startNewNumber || "0".equals(current) || "Error".equals(current)) {
                         display.setText(text);
                         startNewNumber = false;
                     }
                     else{
-                    if (current.equals("0"){
-                      display.setText(text));}
+                    if (current.equals("0")){
+                      display.setText(text);}
                     else{
                             display.setText(current + text);
                         }
