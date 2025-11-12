@@ -42,7 +42,7 @@ public class CalculatorUI extends JFrame {
             btn.setFont(new Font("Arial", Font.BOLD,22));
             btn.addActionListener(e -> {
                 String current = display.getText();
-                if(text.equals("C"){
+                if(text.equals("C")){
                     firstNumber = 0;
                     operation = null;
                     display.setText("0");
@@ -71,7 +71,16 @@ public class CalculatorUI extends JFrame {
                         } else if (operation.equals("*")) {
                             result = new pollaplasiasmos().calculate(firstNumber, second);
                         } else if (operation.equals("/")) {
+                            if (second == 0) {
+                                display.setText("Error");
+                                operation = null;
+                                startNewNumber = true;
+                                return;
+                            }
                             result = new division().calculate(firstNumber, second);
+                            } else {
+                                result = 0;
+                            }
                         } else {
                             result = 0;
                         }
@@ -95,8 +104,8 @@ public class CalculatorUI extends JFrame {
                         startNewNumber = false;
                     }
                     else{
-                    if (current.equals("0"){
-                      display.setText(text));}
+                    if (current.equals("0")){
+                      display.setText(text);}
                     else{
                             display.setText(current + text);
                         }
