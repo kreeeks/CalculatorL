@@ -9,7 +9,6 @@ import org.example.division;
 
 public class CalculatorUI extends JFrame {
 
-
     private JTextField display;
     private double firstNumber = 0;
     private String operation = null;
@@ -21,7 +20,6 @@ public class CalculatorUI extends JFrame {
         setSize(300, 400);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLayout(new BorderLayout(10,10));
-
 
         JTextField display = new JTextField("0");
         display.setEditable(false);
@@ -46,23 +44,21 @@ public class CalculatorUI extends JFrame {
                     firstNumber = 0;
                     operation = null;
                     display.setText("0");
-                } else if (text.equals("=")){
+                }
+                else if (text.equals("=")) {
 
+                    // ✅ Αν δεν έχει επιλεγεί καμία πράξη, μην κάνει τίποτα
+                    if (operation == null || operation.isEmpty()) {
+                        display.setText("No operation selected");
+                        return;
+                    }
 
-                    // εδω θα βαλουμε τι κανει στο = καθε πραξη κλπ
-
-                  if (operation != null && !startNewNumber){
-                        double second = Double.parseDouble(current);
-                       double result;
-
-                    if (operation != null && !startNewNumber) {
-
+                    if (operation != null && !startNewNumber){
                         String[] parts = current.split("[+\\-*/]");
                         if (parts.length < 2) return;
 
-                       // double second = Double.parseDouble(parts[1]);
-
-                        //double result;
+                        double second = Double.parseDouble(parts[1]);
+                        double result;
 
                         if (operation.equals("+")) {
                             result = new prosthesi().calculate(firstNumber, second);
@@ -78,9 +74,6 @@ public class CalculatorUI extends JFrame {
                                 return;
                             }
                             result = new division().calculate(firstNumber, second);
-                            } else {
-                                result = 0;
-                            }
                         } else {
                             result = 0;
                         }
@@ -98,32 +91,28 @@ public class CalculatorUI extends JFrame {
                     operation = text;
                     display.setText(current + text);
                     startNewNumber = false;
-
-            }
+                }
                 else {
                     if (startNewNumber || "0".equals(current) || "Error".equals(current)) {
                         display.setText(text);
                         startNewNumber = false;
                     }
-                    else{
-                    if (current.equals("0")){
-                      display.setText(text);}
-                    else{
+                    else {
+                        if (current.equals("0")) {
+                            display.setText(text);
+                        } else {
                             display.setText(current + text);
                         }
-                }
+                    }
                 }
             });
-
-
-
-
             panel.add(btn);
         }
         add(panel, BorderLayout.CENTER);
         setVisible(true);
         setLocationRelativeTo(null);
     }
+
     public static void main(String[] args){
         SwingUtilities.invokeLater(CalculatorUI::new);
     }
