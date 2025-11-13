@@ -9,7 +9,6 @@ import org.example.division;
 
 public class CalculatorUI extends JFrame {
 
-
     private JTextField display;
     private double firstNumber = 0;
     private String operation = null;
@@ -22,8 +21,7 @@ public class CalculatorUI extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLayout(new BorderLayout(10,10));
 
-
-        display = new JTextField("0");
+        JTextField display = new JTextField("0");
         display.setEditable(false);
         display.setFont(new Font("arial", Font.BOLD,32));
         display.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -41,16 +39,24 @@ public class CalculatorUI extends JFrame {
             btn.setFont(new Font("Arial", Font.BOLD,22));
             btn.addActionListener(e -> {
                 String current = display.getText();
-
                 if(text.equals("C")){
                     firstNumber = 0;
                     operation = null;
                     display.setText("0");
-                    startNewNumber = true;
-                }else if (text.equals("=")){
-                    // εδω θα βαλουμε τι κανει στο = καθε πραξη κλπ
+                }
+                else if (text.equals("=")) {
+
+                    // ✅ Αν δεν έχει επιλεγεί καμία πράξη, μην κάνει τίποτα
+                    if (operation == null || operation.isEmpty()) {
+                        display.setText("No operation selected");
+                        return;
+                    }
+
                     if (operation != null && !startNewNumber){
-                        double second = Double.parseDouble(current);
+                        String[] parts = current.split("[+\\-*/]");
+                        if (parts.length < 2) return;
+
+                        double second = Double.parseDouble(parts[1]);
                         double result;
 
                         if (operation.equals("+")) {
@@ -60,6 +66,12 @@ public class CalculatorUI extends JFrame {
                         } else if (operation.equals("*")) {
                             result = new pollaplasiasmos().calculate(firstNumber, second);
                         } else if (operation.equals("/")) {
+                            if (second == 0) {
+                                display.setText("Error");
+                                operation = null;
+                                startNewNumber = true;
+                                return;
+                            }
                             result = new division().calculate(firstNumber, second);
                         } else {
                             result = 0;
@@ -72,27 +84,34 @@ public class CalculatorUI extends JFrame {
 
                 }
                 else if (text.matches("[+\\-*/]")) {
-                    firstNumber = Double.parseDouble(current);
-                    operation = text;
-                    startNewNumber = true;
+                    if("Error".equals(current)) current="0";
 
-            }
+                    firstNumber = Double.parseDouble(current.replaceAll("[^0-9.\\-]",""));
+                    operation = text;
+                    display.setText(current + text);
+                    startNewNumber = false;
+                }
                 else {
-                    if (startNewNumber || current.equals("0")) {
+                    if (startNewNumber || "0".equals(current) || "Error".equals(current)) {
                         display.setText(text);
                         startNewNumber = false;
-                    } else{
+                    }
+                    else {
+                        if (current.equals("0")) {
+                            display.setText(text);
+                        } else {
                             display.setText(current + text);
                         }
+                    }
                 }
             });
-
             panel.add(btn);
         }
         add(panel, BorderLayout.CENTER);
         setVisible(true);
         setLocationRelativeTo(null);
     }
+
     public static void main(String[] args){
         SwingUtilities.invokeLater(CalculatorUI::new);
     }
