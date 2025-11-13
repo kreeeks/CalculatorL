@@ -27,8 +27,7 @@ public class CalculatorUI extends JFrame {
         display.setHorizontalAlignment(SwingConstants.RIGHT);
         add(display, BorderLayout.NORTH);
 
-        JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(4,4,5,5));
+        JPanel panel = new JPanel(new GridLayout(4,4,5,5));
         String[] labels={
                 "7","8","9","C",
                 "4","5","6","+",
@@ -78,7 +77,7 @@ public class CalculatorUI extends JFrame {
                             result = 0;
                         }
 
-                        display.setText(current + "=" + result);
+                        display.setText(String.valueOf(result));
                         operation = null;
                         startNewNumber = true;
                     }
